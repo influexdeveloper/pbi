@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Builder | Premium Web Development Studio</title>
+    
+    <!-- Professional & Techy Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- tsParticles Library for Plexus Effect -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.0/tsparticles.slim.bundle.min.js"></script>
+
+    <style>
+        /* Logo-derived Color Palette */
+        :root[data-theme="dark"] {
+            --bg-primary: #060b1b;
+            --bg-secondary: #0b132b;
+            --bg-card: rgba(15, 23, 48, 0.75);
+            --border-color: rgba(0, 210, 255, 0.15);
+            --border-color-hover: rgba(0, 210, 255, 0.4);
+            --text-main: #f0f6fc;
+            --text-muted: #8e9bb0;
+            --brand-navy: #060b27;
+            --accent-cyan: #00d2ff;
+            --accent-blue: #0088ff;
+            --accent-glow: rgba(0, 210, 255, 0.15);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --particle-color: #00d2ff;
+            --particle-link: rgba(0, 136, 255, 0.25);
+        }
+
+        :root[data-theme="light"] {
+            --bg-primary: #f4f7fb;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --border-color: #dce4ed;
+            --border-color-hover: #0088ff;
+            --text-main: #0a1128;
+            --text-muted: #53627c;
+            --brand-navy: #060b27;
+            --accent-cyan: #0088ff;
+            --accent-blue: #0055ff;
+            --accent-glow: rgba(0, 136, 255, 0.08);
+            --shadow: 0 10px 30px rgba(6, 11, 39, 0.06);
+            --particle-color: #0088ff;
+            --particle-link: rgba(0, 85, 255, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        code, .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            color: var(--text-main);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .accent-text {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Header & Nav */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(6, 11, 27, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        [data-theme="light"] header {
+            background-color: rgba(244, 247, 251, 0.85);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 76px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 800;
+            font-size: 1.35rem;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Theme Switcher Button */
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        /* Relative container for sections containing Particles */
+        .particle-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .particle-section .particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle-section > .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Banner / Hero Section (Section 1 with Particles) */
+        .hero {
+            padding: 140px 0 110px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 20%, var(--accent-glow) 0%, transparent 70%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 3.75rem;
+            font-weight: 800;
+            max-width: 900px;
+            margin: 0 auto 24px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 210, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 210, 255, 0.45);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-secondary);
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Glassmorphism Card Styling */
+        .about-card, .team-card, .pricing-card, .contact-wrapper {
+            background-color: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: all 0.25s ease;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+        }
+
+        .about-card {
+            padding: 36px;
+        }
+
+        .about-card:hover {
+            border-color: var(--border-color-hover);
+            transform: translateY(-4px);
+        }
+
+        .about-card .icon-tag {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .about-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .about-card p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .team-card {
+            padding: 28px;
+            text-align: center;
+        }
+
+        .team-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+        }
+
+        .team-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin: 0 auto 18px;
+            border: 2px solid var(--accent-cyan);
+            padding: 3px;
+            background-color: var(--bg-secondary);
+        }
+
+        .team-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .team-card .role {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+
+        .team-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+        }
+
+        .team-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-muted);
+        }
+
+        /* Pricing Section */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            padding: 40px 32px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent-cyan);
+            box-shadow: var(--shadow);
+            background: linear-gradient(180deg, var(--bg-card) 0%, rgba(0, 210, 255, 0.03) 100%);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -14px;
+            right: 28px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .price {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin: 20px 0;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: -0.03em;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 24px 0 36px;
+            flex-grow: 1;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        /* Contact Section (Section 2 with Particles) */
+        .contact-section {
+            background: radial-gradient(circle at 50% 80%, var(--accent-glow) 0%, transparent 70%);
+        }
+
+        .contact-wrapper {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 48px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 45px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .contact-wrapper { padding: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <!-- SVG Logo based on attached Pixel Builder icon -->
+                <span class="logo-icon">
+                    <svg width="36" height="36" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Hexagonal Outer Frame (Navy) -->
+                        <path d="M100 20 L165 57.5 V132.5 L100 170 L35 132.5 V57.5 Z" fill="none" stroke="#00D2FF" stroke-width="8"/>
+                        <path d="M100 32 L152 62 V122 L100 152 L48 122 V62 Z" fill="#060B27"/>
+                        <!-- Central 3D Pixel Cube -->
+                        <!-- Top Face -->
+                        <polygon points="100,75 125,90 100,105 75,90" fill="#00D2FF"/>
+                        <!-- Left Face -->
+                        <polygon points="75,90 100,105 100,135 75,120" fill="#0088FF"/>
+                        <!-- Right Face -->
+                        <polygon points="100,105 125,90 125,120 100,135" fill="#0055FF"/>
+                    </svg>
+                </span>
+                <span>Pixel<span class="accent-text">Builder</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+                <span id="themeIcon">☀️</span> <span id="themeText">Light</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- SECTION 1 WITH PARTICLES: Hero / Banner -->
+    <section class="hero particle-section">
+        <!-- Isolated Particle Canvas 1 -->
+        <div id="particles-hero" class="particle-canvas"></div>
+
+        <div class="container">
+            <div class="hero-badge font-mono">
+                <span>/// WEB DEVELOPMENT & ARCHITECTURE STUDIO</span>
+            </div>
+            <h1>Engineered for pixel perfection and high performance.</h1>
+            <p>Pixel Builder is a collective of senior developers crafting high-speed web applications, custom digital platforms, and robust cloud infrastructure.</p>
+            <a href="#contact" class="btn btn-primary">Start Your Project &rarr;</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Engineering Standards</h2>
+            <p class="section-subtitle font-mono">why teams choose pixel builder</p>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <span class="icon-tag">01 // ARCHITECTURE</span>
+                    <h3>Type-Safe & Modern</h3>
+                    <p>We build resilient full-stack systems with modern frameworks (TypeScript, React, Next.js, Go, and Python) designed for clean maintainability.</p>
+                </div>
+                <div class="about-card">
+                    <span class="icon-tag">02 // PERFORMANCE</span>
+                    <h3>Sub-Second Speed</h3>
+                    <p>Core Web Vitals and load speeds are built into our workflow. We optimize server rendering, database queries, and client assets from day one.</p>
+                </div>
+                <div class="about-card">
+                    <span class="icon-tag">03 // SCALABILITY</span>
+                    <h3>Cloud-Native Infrastructure</h3>
+                    <p>From microservices to serverless pipelines, we design backends that seamlessly handle high traffic spikes without downtime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section (7 Members) -->
+    <section id="team">
+        <div class="container">
+            <h2 class="section-title">The Developers</h2>
+            <p class="section-subtitle font-mono">7 senior engineers. zero overhead.</p>
+
+            <div class="team-grid">
+                <!-- Member 1 -->
+                <div class="team-card">
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Alex" alt="Alex Rivera" class="team-avatar">
+                    <h3>Alex Rivera</h3>
+                    <div class="role">Lead Solutions Architect</div>
+                    <p>Specializes in large-scale system distribution and cloud infrastructure.</p>
+                    <div class="team-tags">
+                        <span class="tag">Go</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">Kubernetes</span>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div class="team-card">
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Sarah" alt="Sarah Chen" class="team-avatar">
+                    <h3>Sarah Chen</h3>
+                    <div class="role">Principal Frontend Lead</div>
+                    <p>Crafts lightning-fast web interfaces and scalable UI component systems.</p>
+                    <div class="team-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Next.js</span>
+                        <span class="tag">TypeScript</span>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div class="team-card">
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Marcus" alt="Marcus Vance" class="team-avatar">
+                    <h3>Marcus Vance</h3>
+                    <div class="role">Senior Backend Engineer</div>
+                    <p>Focuses on high-throughput REST/GraphQL APIs and database tuning.</p>
+                    <div class="team-tags">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Redis</span>
+                    </div>
+                </div>
+
+                <!-- Member 4 -->
+                <div class="team-card">
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Elena" alt="Elena Rostova" class="team-avatar">
+                    <h3>Elena Rostova</h3>
+                    <div class="role">DevOps & Security Spec</div>
+                    <p>Automates deployment pipelines and enforces strict cloud security standards.</p>
+                    <div class="team-tags">
+                        <span class="tag">Docker</span>
+                        <span class="tag">Terraform</span>
+                        <span class="tag">CI/CD</span>
+                    </div>
+                </div>
+
+                <!-- Member 5 -->
+                <div class="team-card">
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=David" alt="David Kim" class="team-avatar">
+                    <h3>David Kim</h3>
+                    <div class="role">Full-Stack Developer</div>
+                    <p>Rapid MVP specialist bringing complex web apps from concept to launch.</p>
+                    <div class="team-tags">
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">GraphQL</span>
+                    </div>
+                </div>
+
+                <!-- Member 6 -->
+                <div class="team-card">
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Maya" alt="Maya Lin" class="team-avatar">
+                    <h3>Maya Lin</h3>
+                    <div class="role">UI/UX Engineer</div>
+                    <p>Converts complex user flows into intuitive, modern digital experiences.</p>
+                    <div class="team-tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">Tailwind</span>
+                        <span class="tag">Design Systems</span>
+                    </div>
+                </div>
+
+                <!-- Member 7 -->
+                <div class="team-card">
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Jordan" alt="Jordan Smith" class="team-avatar">
+                    <h3>Jordan Smith</h3>
+                    <div class="role">QA & Test Automation</div>
+                    <p>Builds robust automated testing strategies to ensure zero production bugs.</p>
+                    <div class="team-tags">
+                        <span class="tag">Playwright</span>
+                        <span class="tag">Jest</span>
+                        <span class="tag">Cypress</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <div class="container">
+            <h2 class="section-title">Engagement Models</h2>
+            <p class="section-subtitle font-mono">transparent pricing tailored to your requirements</p>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>MVP Sprint</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Perfect for launching new ideas or prototypes fast.</p>
+                    <div class="price">$6,500 <span>/ sprint</span></div>
+                    <ul class="pricing-features">
+                        <li>Dedicated 2-Developer Pod</li>
+                        <li>2-Week Delivery Cycles</li>
+                        <li>Full MVP Development & Launch</li>
+                        <li>Direct Slack Channel & Daily Syncs</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary">Select Plan</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <span class="pricing-badge">Recommended</span>
+                    <h3>Dedicated Studio</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Complete software engineering studio for long-term builds.</p>
+                    <div class="price">$22,000 <span>/ month</span></div>
+                    <ul class="pricing-features">
+                        <li>Full Team Access (All 7 Developers)</li>
+                        <li>Unlimited Feature Iteration</li>
+                        <li>Production DevOps & CI/CD Pipelines</li>
+                        <li>24/7 Monitoring & System Maintenance</li>
+                        <li>Dedicated Technical Lead</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Book Dedicated Team</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2 WITH PARTICLES: Contact Us Section -->
+    <section id="contact" class="particle-section contact-section">
+        <!-- Isolated Particle Canvas 2 -->
+        <div id="particles-contact" class="particle-canvas"></div>
+
+        <div class="container">
+            <h2 class="section-title">Let's Build Something Great</h2>
+            <p class="section-subtitle font-mono">get in touch with our team directly</p>
+
+            <div class="contact-wrapper">
+                <form id="contactForm" onsubmit="event.preventDefault(); alert('Thank you! The Pixel Builder team will contact you within 24 hours.');">
+                    <div class="form-group">
+                        <label for="name">NAME</label>
+                        <input type="text" id="name" class="form-control" placeholder="Alex Morgan" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">WORK EMAIL</label>
+                        <input type="email" id="email" class="form-control" placeholder="alex@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">PROJECT DETAILS</label>
+                        <textarea id="message" class="form-control" placeholder="Tell us about your project timeline and technical goals..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message &rarr;</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Pixel Builder Studio. High-Performance Web Systems.</p>
+        </div>
+    </footer>
+
+    <!-- Theme Switcher & Dual Plexus Initialization Script -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        // Initial Theme Setup
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateToggleUI(currentTheme);
+
+        themeToggleBtn.addEventListener('click', () => {
+            const activeTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateToggleUI(newTheme);
+            
+            // Reload particle configs with updated theme colors
+            initPlexus("particles-hero", newTheme, 45);
+            initPlexus("particles-contact", newTheme, 35);
+        });
+
+        function updateToggleUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark';
+            }
+        }
+
+        // Function to initialize tsParticles on specific container IDs
+        function initPlexus(elementId, theme, count) {
+            const isDark = theme === 'dark';
+            const particleColor = isDark ? '#00D2FF' : '#0088FF';
+            const lineColor = isDark ? 'rgba(0, 136, 255, 0.3)' : 'rgba(0, 85, 255, 0.18)';
+
+            tsParticles.load(elementId, {
+                fullScreen: { enable: false },
+                fpsLimit: 60,
+                particles: {
+                    color: { value: particleColor },
+                    links: {
+                        color: lineColor,
+                        distance: 130,
+                        enable: true,
+                        opacity: 0.6,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 0.7,
+                        direction: "none",
+                        outModes: { default: "bounce" }
+                    },
+                    number: {
+                        density: { enable: true, area: 700 },
+                        value: count
+                    },
+                    opacity: { value: 0.6 },
+                    shape: { type: "circle" },
+                    size: { value: { min: 1, max: 3 } }
+                },
+                detectRetina: true
+            });
+        }
+
+        // Initialize particles only in Hero and Contact sections upon DOM Ready
+        window.addEventListener('DOMContentLoaded', () => {
+            initPlexus("particles-hero", currentTheme, 45);
+            initPlexus("particles-contact", currentTheme, 35);
+        });
+    </script>
+</body>
+</html>
