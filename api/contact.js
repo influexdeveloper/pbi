@@ -1,4 +1,4 @@
-const TO = ['contact@pixelbuilderinc.com', 'dev@pixelbuilderinc.com'];
+const TO = ['admin@pixelbuilderinc.com', 'dev@pixelbuilderinc.com'];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'method' });
